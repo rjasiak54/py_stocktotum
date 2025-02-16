@@ -2,3 +2,7 @@ stack/env-sandbox/.env
 .mypy_cache
 
 *.pyc
+avdata/
+
+.venv
+venv3.12
