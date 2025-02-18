@@ -33,8 +33,7 @@
 
 Let S<sup>\*</sup><sub>2</sub> be the price of asset underlying the futures contract at time t<sub>2</sub>:
 
-- S<sub>2</sub> + F<sub>1</sub> - F<sub>2</sub> = F<sub>1</sub> + b<sub>2</sub>
-- ^ = F<sub>1</sub> + (S<sup>\*</sup><sub>2</sub> - F<sub>2</sub>) + (S<sub>2</sub> - S<sup>*</sup><sub>2</sub>)
+- S<sub>2</sub> + F<sub>1</sub> - F<sub>2</sub> = F<sub>1</sub> + b<sub>2</sub> = F<sub>1</sub> + (S<sup>\*</sup><sub>2</sub> - F<sub>2</sub>) + (S<sub>2</sub> - S<sup>*</sup><sub>2</sub>)
 
 ### Calculating the Minimum Variance Hedge Ratio
 
