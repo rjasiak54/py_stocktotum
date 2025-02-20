@@ -35,8 +35,24 @@ Let S<sup>\*</sup><sub>2</sub> be the price of asset underlying the futures cont
 
 - S<sub>2</sub> + F<sub>1</sub> - F<sub>2</sub> = F<sub>1</sub> + b<sub>2</sub> = F<sub>1</sub> + (S<sup>\*</sup><sub>2</sub> - F<sub>2</sub>) + (S<sub>2</sub> - S<sup>*</sup><sub>2</sub>)
 
-### Calculating the Minimum Variance Hedge Ratio
+### Calculating the Minimum Variance Hedge Ratio (page 57)
 
 - ∆S: Change in spot price, S, during a period of time equal to the life of the hedge
-- ∆F: Change in futures price, F, during a period of time equal to the life of the
-hedge.
+- ∆F: Change in futures price, F, during a period of time equal to the life of the hedge.
+
+Hedge ratio: *h*<sup>\*</sup>
+
+
+### Optimal Number of Contracts
+> To calculate the number of contracts that should be used in hedging, define:
+    <br>- Q<sub>A</sub>: Size of position being hedged (units)
+    <br>- Q<sub>F</sub> : Size of one futures contract (units)
+    <br>- N<sup>\*</sup>  : Optimal number of futures contracts for hedging.
+
+N<sup>\*</sup> = (*h*<sup>\*</sup> x Q<sub>A</sub>) / Q<sub>F</sub>
+
+
+
+
+
+Note: Take the contract to the closest date of closing as you can, *after* the closing date (not before)
