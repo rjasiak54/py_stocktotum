@@ -2,7 +2,7 @@ from . import basic
 
 
 def main() -> None:
-    m = 10
+    m = 100
     r = 0.05
     y = 5
     result = basic.future_discrete_value(m, r, y)
