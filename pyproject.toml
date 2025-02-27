@@ -16,6 +16,7 @@ aiofiles = "^24.1.0"
 
 types-aiofiles = "^24.1.0.20240626"
 pytest = "^8.3.4"
+yfinance = "^0.2.54"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
