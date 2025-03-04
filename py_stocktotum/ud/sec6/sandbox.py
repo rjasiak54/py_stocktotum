@@ -3,12 +3,12 @@ from typing import Any
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas
-import yfinance  # type: ignore
 import scipy.optimize as opt
+import yfinance  # type: ignore
 
 NUM_TRADING_DAYS = 252
 NUM_PORTFOLIOS = 10000
-stocks = ["AAPL", "WMT", "TSLA", "GE", "AMZN", "DB"]
+stocks = ["AAPL", "WMT", "TSLA", "GE", "AMZN", "DB", "META"]
 
 start_date = "2012-01-01"
 end_date = "2017-01-01"
@@ -40,14 +40,18 @@ def show_statistics(data: np.typing.NDArray[Any]) -> None:
     print(data.cov() * NUM_TRADING_DAYS)
 
 
-def show_mean_variance(returns: np.typing.NDArray[Any], weights: np.typing.NDArray[Any]) -> None:
+def show_mean_variance(
+    returns: np.typing.NDArray[Any], weights: np.typing.NDArray[Any]
+) -> None:
     pr = np.sum(returns.mean() * weights) * NUM_TRADING_DAYS
     pv = np.sqrt(np.dot(weights.T, np.dot(returns.cov() * NUM_TRADING_DAYS, weights)))
     print(f"expected portfolio mean (return):                   {pr}")
     print(f"expected portfolio volatility (standard deviation): {pv}")
 
 
-def show_portfolio(returns: np.typing.NDArray[Any], vols: np.typing.NDArray[Any]) -> None:
+def show_portfolio(
+    returns: np.typing.NDArray[Any], vols: np.typing.NDArray[Any]
+) -> None:
     plt.figure(figsize=(10, 6))
     plt.scatter(vols, returns, c=returns / vols, marker="o")
     plt.grid(True)
@@ -70,17 +74,25 @@ def generate_portfolios(
         w /= np.sum(w)
         p_weights.append(w)
         p_means.append(np.sum(returns.mean() * w) * NUM_TRADING_DAYS)
-        p_risks.append(np.sqrt(np.dot(w.T, np.dot(returns.cov() * NUM_TRADING_DAYS, w))))
+        p_risks.append(
+            np.sqrt(np.dot(w.T, np.dot(returns.cov() * NUM_TRADING_DAYS, w)))
+        )
     return np.array(p_weights), np.array(p_means), np.array(p_risks)
 
 
-def statistics(weights: np.typing.NDArray[Any], returns: np.typing.NDArray[Any]) -> np.typing.NDArray[Any]:
+def statistics(
+    weights: np.typing.NDArray[Any], returns: np.typing.NDArray[Any]
+) -> np.typing.NDArray[Any]:
     p_return = np.sum(returns.mean() * weights) * NUM_TRADING_DAYS
-    p_vol = np.sqrt(np.dot(weights.T, np.dot(returns.cov() * NUM_TRADING_DAYS, weights)))
+    p_vol = np.sqrt(
+        np.dot(weights.T, np.dot(returns.cov() * NUM_TRADING_DAYS, weights))
+    )
     return np.array([p_return, p_vol, p_return / p_vol])
 
 
-def min_sharpe(weights: np.typing.NDArray[Any], returns: np.typing.NDArray[Any]) -> np.typing.NDArray[Any]:
+def min_sharpe(
+    weights: np.typing.NDArray[Any], returns: np.typing.NDArray[Any]
+) -> np.typing.NDArray[Any]:
     return -statistics(weights, returns)[2]
 
 
@@ -89,13 +101,23 @@ def optimize_portfolio(
 ) -> np.typing.NDArray[Any]:
     constraints = {"type": "eq", "fun": lambda x: np.sum(x) - 1}
     bounds = tuple((0, 1) for _ in range(len(stocks)))
-    return opt.minimize(fun=min_sharpe, x0=weights[0], bounds=bounds,args=returns, method="SLSQP", constraints=constraints)
+    return opt.minimize(
+        fun=min_sharpe,
+        x0=weights[0],
+        bounds=bounds,
+        args=returns,
+        method="SLSQP",
+        constraints=constraints,
+    )
     return np.array([])
 
 
 def print_portfolio_returns(optimum: Any, returns: Any) -> None:
-    print(f'Optimal portfolio: {optimum['x'].round(3)}')
-    print(f'exepcted return, vol & sharpe ratio: {statistics(optimum["x"].round(3), returns)}')
+    print(f"Optimal portfolio: {optimum['x'].round(3)}")
+    print(
+        f'exepcted return, vol & sharpe ratio: {statistics(optimum["x"].round(3), returns)}'
+    )
+
 
 def show_opt_portfolio(opt: Any, ret: Any, pret: Any, pvol: Any) -> None:
     plt.figure(figsize=(10, 6))
@@ -104,9 +126,10 @@ def show_opt_portfolio(opt: Any, ret: Any, pret: Any, pvol: Any) -> None:
     plt.xlabel("Expected Volatility")
     plt.ylabel("Expected Return")
     plt.colorbar(label="Sharpe Ratio")
-    s = statistics(opt['x'], ret)
-    plt.plot(s[1], s[0], 'g*', markersize=20)
+    s = statistics(opt["x"], ret)
+    plt.plot(s[1], s[0], "g*", markersize=20)
     plt.show()
+
 
 if __name__ == "__main__":
     d = download_data()
