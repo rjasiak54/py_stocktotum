@@ -18,6 +18,8 @@ yfinance = "^0.2.54"
 scipy-stubs = "^1.15.2.0"
 numpy = "^2.2.3"
 
+plyer = "^2.1.0"
+pandas-stubs = "^2.2.3.250308"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
