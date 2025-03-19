@@ -13,4 +13,4 @@ def download_data(
     ticker = yf.download(stock, start_date, end_date)
     if ticker is None:
         raise ValueError(f"Ticker is None!!! ticker={stock}")
-    return ticker["Close"]
+    return ticker["Close"]  # type: ignore
