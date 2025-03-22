@@ -9,3 +9,4 @@ if __name__ == "__main__":
     print(sd)
     plt.plot(sd)
     plt.show()
+    print()
