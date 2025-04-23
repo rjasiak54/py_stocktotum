@@ -8,6 +8,7 @@ def construct_signals(data: pd.DataFrame, short_period: int, long_period: int) -
     data["Short EMA"] = data["Price"].ewm(span=short_period, adjust=False).mean()
     data["Long EMA"] = data["Price"].ewm(span=long_period, adjust=False).mean()
     # for index, row in data:
+    print(short_period)
 
 
 # class SmaCrossover:
